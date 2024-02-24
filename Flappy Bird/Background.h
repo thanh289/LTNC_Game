@@ -18,6 +18,8 @@ public:
     void Move();
 
     void Stop();
+
+    void Continue();
 };
 
 

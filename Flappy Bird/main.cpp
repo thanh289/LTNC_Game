@@ -2,18 +2,19 @@
 #include "GameLoop.h"
 
 
-GameLoop* g = new GameLoop();
+GameLoop* g1 = new GameLoop();
 
 int main(int argc, char** argv)
 {
 
-	g->Intialize();
-	while (g->getGameState())
+	g1->Initialize();
+	while (g1->getGameState())
 	{
-		g->Event();
-		g->Render();
+		g1->Event();
+		g1->Render();
 
 	}
-	g->Clear();
+	g1->Clear();
+
 	return 0;
 }

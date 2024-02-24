@@ -52,7 +52,13 @@ void Player::Die()
     inJump = false;
     gravity = 0;
     jumpHeight = 0;
-    accelerator = 0;
+}
+
+void Player::Revive()
+{
+    gravity = 0.1;
+    jumpHeight = -4;
+    Ypos = 320;
 }
 
 

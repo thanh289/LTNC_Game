@@ -37,7 +37,32 @@ bool GameLoop::getGameState()
 	return GameState;
 }
 
-void GameLoop::Intialize()
+void GameLoop::PlayAgain()
+{
+    guide.setSrc(0, 0, 184, 267);
+	guide.setDest((SCREEN_WIDTH-184)/2, (SCREEN_HEIGHT-267)/2, 184, 267);
+	d.setSrc(0, 0, 192, 42);
+	d.setDest((SCREEN_WIDTH-192)/2, (SCREEN_HEIGHT-42)/2, 192, 42);
+
+	AliveBird.setSrc(0, 0, 34, 24);
+	AliveBird.setDest(50, SCREEN_HEIGHT/2, 34, 24);
+	for(int i=0; i<8; i++)
+        ground[i].SetGround(i*GROUND_WIDTH - 50);
+	for(int i=0; i<8; i++)
+    {
+        YCol = rand() % 150;
+        ColUp[i].SetPos((SCREEN_WIDTH + 170*i+400), -YCol);
+        ColDown[i].SetPos((SCREEN_WIDTH + 170*i+400), (-YCol + COL_HEIGHT + 100));
+    }
+    for(int i=0; i<10; i++)
+    {
+        number[i].setSrc(0, 0, 24, 36);
+        number[i].setDest(20, 20, 24, 36);
+    }
+}
+
+
+void GameLoop::Initialize()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
@@ -147,6 +172,23 @@ void GameLoop::Event()
         }
     }
 
+    if(Die)
+    {
+        if(event1.key.keysym.sym == SDLK_r)
+        {
+            PlayAgain();
+            Die = false;
+            Start = false;
+            AliveBird.Revive();
+            Score = 0;
+            for(int j=0; j<8; j++)
+            {
+                ground[j].Continue();
+                ColUp[j].Continue();
+                ColDown[j].Continue();
+            }
+        }
+    }
 }
 
 

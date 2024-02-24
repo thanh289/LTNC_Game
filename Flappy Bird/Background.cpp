@@ -36,3 +36,9 @@ void Background::Stop()
     GroundState = false;
 }
 
+void Background::Continue()
+{
+    GroundState = true;
+}
+
+

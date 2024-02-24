@@ -20,4 +20,5 @@ public:
 
     void Stop();
 
+    void Continue();
 };

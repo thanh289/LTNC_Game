@@ -37,3 +37,7 @@ void Collumn::Stop()
     ColState = false;
 }
 
+void Collumn::Continue()
+{
+    ColState = true;
+}

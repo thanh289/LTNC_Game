@@ -39,7 +39,8 @@ private:
 public:
 	GameLoop();
 	bool getGameState();
-	void Intialize();
+	void PlayAgain();
+	void Initialize();
 	void Event();
 	void Render();
 	void Clear();

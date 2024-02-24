@@ -6,7 +6,7 @@ class Player :public Object
 {
     private:
         double gravity = 0.1;
-        double Ypos = 256;
+        double Ypos = 320;
         double accelerator = 0;
         double jumpHeight = -4;
         bool inJump = false;
@@ -19,6 +19,7 @@ class Player :public Object
         void Gravity();
         void Jump();
         void Die();
+        void Revive();
         bool JumpState();
         bool GetCollision(SDL_Rect Col, int ob_W, int ob_H);
         void AliveRender(SDL_Renderer* ren, SDL_Rect src, SDL_Rect dest);
