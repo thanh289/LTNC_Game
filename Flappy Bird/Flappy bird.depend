@@ -861,3 +861,57 @@
 	"begin_code.h"
 	"close_code.h"
 
+1708755426 source:c:\github\ltnc_game\flappy bird\background.cpp
+	"Background.h"
+
+1708748976 c:\github\ltnc_game\flappy bird\background.h
+	<iostream>
+	"Object.h"
+
+1708358986 c:\github\ltnc_game\flappy bird\object.h
+	<SDL.h>
+	"TextureManager.h"
+
+1708247089 c:\github\ltnc_game\flappy bird\texturemanager.h
+	<SDL.h>
+	<SDL_image.h>
+
+1708755435 source:c:\github\ltnc_game\flappy bird\col.cpp
+	"Col.h"
+
+1708700499 c:\github\ltnc_game\flappy bird\col.h
+	"Object.h"
+	"Player.h"
+
+1708764314 c:\github\ltnc_game\flappy bird\player.h
+	"Object.h"
+	"Col.h"
+
+1708765480 source:c:\github\ltnc_game\flappy bird\gameloop.cpp
+	<bits/stdc++.h>
+	"GameLoop.h"
+
+1708764664 c:\github\ltnc_game\flappy bird\gameloop.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<iostream>
+	"Player.h"
+	"Object.h"
+	"Background.h"
+	"Col.h"
+
+1708619289 source:c:\github\ltnc_game\flappy bird\main.cpp
+	<iostream>
+	"GameLoop.h"
+
+1708502899 source:c:\github\ltnc_game\flappy bird\object.cpp
+	"Object.h"
+	"TextureManager.h"
+
+1708764291 source:c:\github\ltnc_game\flappy bird\player.cpp
+	"Player.h"
+
+1708247098 source:c:\github\ltnc_game\flappy bird\texturemanager.cpp
+	"TextureManager.h"
+
