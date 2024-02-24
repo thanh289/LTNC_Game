@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Codeblock_project" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Codeblock_project" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Codeblock_project" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add directory="C:/mingw_dev_lib/i686-w64-mingw32/include/SDL2" />
+			<Add directory="C:/mingw_dev_lib/i686-w64-mingw32 (image)/include/SDL2" />
+			<Add directory="C:/mingw_dev_lib/i686-w64-mingw32 (ttf)/include/SDL2" />
+		</Compiler>
+		<Linker>
+			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf" />
+			<Add directory="C:/mingw_dev_lib/i686-w64-mingw32/lib" />
+			<Add directory="C:/mingw_dev_lib/i686-w64-mingw32 (image)/lib" />
+			<Add directory="C:/mingw_dev_lib/i686-w64-mingw32 (ttf)/lib" />
+		</Linker>
+		<Unit filename="headTexture.hpp" />
+		<Unit filename="headTime.hpp" />
+		<Unit filename="headWindow.hpp" />
+		<Unit filename="mTexture.cpp" />
+		<Unit filename="mTime.cpp" />
+		<Unit filename="mWindow.cpp" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
