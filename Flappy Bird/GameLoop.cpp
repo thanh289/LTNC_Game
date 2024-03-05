@@ -11,8 +11,20 @@ GameLoop::GameLoop()
 	GameState = false;
 	guide.setSrc(0, 0, 184, 267);
 	guide.setDest((SCREEN_WIDTH-184)/2, (SCREEN_HEIGHT-267)/2, 184, 267);
-	d.setSrc(0, 0, 192, 42);
-	d.setDest((SCREEN_WIDTH-192)/2, (SCREEN_HEIGHT-42)/2, 192, 42);
+	GameOver.setSrc(0, 0, 192, 42);
+	GameOver.setDest((SCREEN_WIDTH-192)/2, (SCREEN_HEIGHT-42)/4, 192, 42);
+	ScoreBoard.setSrc(0, 0, 113, 57);
+	ScoreBoard.setDest((SCREEN_WIDTH-339)/2, 220, 339, 171);
+	New.setSrc(0, 0, 16, 7);
+	New.setDest(345, 310, 32, 14);
+	OkButton.setSrc(0, 0, 80, 28);
+	OkButton.setDest((SCREEN_WIDTH-80)/2, 400, 80, 28);
+    CopperIcon.setSrc(0, 0, 66, 66);
+    CopperIcon.setDest(170, 280, 66, 66);
+    SilverIcon.setSrc(0, 0, 66, 66);
+    SilverIcon.setDest(170, 280, 66, 66);
+    GoldIcon.setSrc(0, 0, 66, 66);
+    GoldIcon.setDest(170, 280, 66, 66);
 
 	AliveBird.setSrc(0, 0, 34, 24);
 	AliveBird.setDest(50, SCREEN_HEIGHT/2, 34, 24);
@@ -26,8 +38,9 @@ GameLoop::GameLoop()
     }
     for(int i=0; i<10; i++)
     {
-        number[i].setSrc(0, 0, 24, 36);
-        number[i].setDest(20, 20, 24, 36);
+        numberCount[i].setSrc(0, 0, 24, 36);
+        numberCur[i].setSrc(0, 0, 24, 36);
+        numberBest[i].setSrc(0, 0, 24, 36);
     }
 
 }
@@ -41,8 +54,10 @@ void GameLoop::PlayAgain()
 {
     guide.setSrc(0, 0, 184, 267);
 	guide.setDest((SCREEN_WIDTH-184)/2, (SCREEN_HEIGHT-267)/2, 184, 267);
-	d.setSrc(0, 0, 192, 42);
-	d.setDest((SCREEN_WIDTH-192)/2, (SCREEN_HEIGHT-42)/2, 192, 42);
+	GameOver.setSrc(0, 0, 192, 42);
+	GameOver.setDest((SCREEN_WIDTH-192)/2, (SCREEN_HEIGHT-42)/4, 192, 42);
+    ScoreBoard.setSrc(0, 0, 113, 57);
+	ScoreBoard.setDest((SCREEN_WIDTH-339)/2, 220, 339, 171);
 
 	AliveBird.setSrc(0, 0, 34, 24);
 	AliveBird.setDest(50, SCREEN_HEIGHT/2, 34, 24);
@@ -54,18 +69,21 @@ void GameLoop::PlayAgain()
         ColUp[i].SetPos((SCREEN_WIDTH + 170*i+400), -YCol);
         ColDown[i].SetPos((SCREEN_WIDTH + 170*i+400), (-YCol + COL_HEIGHT + 100));
     }
+
     for(int i=0; i<10; i++)
     {
-        number[i].setSrc(0, 0, 24, 36);
-        number[i].setDest(20, 20, 24, 36);
+        numberCount[i].setSrc(0, 0, 24, 36);
+        numberCount[i].setDest(20, 20, 24, 36);
     }
+
+    CheckNew = 0;
 }
 
 
 void GameLoop::Initialize()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
-	window = SDL_CreateWindow("My Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+	window = SDL_CreateWindow("FLAPPY BIRD", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	if(window == NULL)
     {
         cout<<"Failed to create window! Error: "<<SDL_GetError();
@@ -80,12 +98,14 @@ void GameLoop::Initialize()
             GameState = true;
 
             guide.CreateTexture("image/message.png", renderer);
-            d.CreateTexture("image/gameover.png", renderer);
+            GameOver.CreateTexture("image/gameover.png", renderer);
+            ScoreBoard.CreateTexture("image/score-board.png", renderer);
+            New.CreateTexture("image/new.png", renderer);
             AliveBird.CreateTexture("image/yellowbird1.png", renderer);
             AliveBird.CreateTexture1("image/yellowbird2.png", renderer);
             AliveBird.CreateTexture2("image/yellowbird3.png", renderer);
             DieBird.CreateTexture("image/yellowbird4.png", renderer);
-            b.CreateTexture("image/background.png", renderer);
+            Back.CreateTexture("image/background.png", renderer);
             for(int i=0; i<8; i++)
                 ground[i].CreateTexture("image/base.png", renderer);
             for(int i=0; i<8; i++)
@@ -93,17 +113,46 @@ void GameLoop::Initialize()
             for(int i=0; i<8; i++)
                 ColDown[i].CreateTexture("image/pipe-green-down.png", renderer);
 
-            number[0].CreateTexture("image/0.png", renderer);
-            number[1].CreateTexture("image/1.png", renderer);
-            number[2].CreateTexture("image/2.png", renderer);
-            number[3].CreateTexture("image/3.png", renderer);
-            number[4].CreateTexture("image/4.png", renderer);
-            number[5].CreateTexture("image/5.png", renderer);
-            number[6].CreateTexture("image/6.png", renderer);
-            number[7].CreateTexture("image/7.png", renderer);
-            number[8].CreateTexture("image/8.png", renderer);
-            number[9].CreateTexture("image/9.png", renderer);
+            numberCount[0].CreateTexture("image/0.png", renderer);
+            numberCount[1].CreateTexture("image/1.png", renderer);
+            numberCount[2].CreateTexture("image/2.png", renderer);
+            numberCount[3].CreateTexture("image/3.png", renderer);
+            numberCount[4].CreateTexture("image/4.png", renderer);
+            numberCount[5].CreateTexture("image/5.png", renderer);
+            numberCount[6].CreateTexture("image/6.png", renderer);
+            numberCount[7].CreateTexture("image/7.png", renderer);
+            numberCount[8].CreateTexture("image/8.png", renderer);
+            numberCount[9].CreateTexture("image/9.png", renderer);
 
+            numberCur[0].CreateTexture("image/0.png", renderer);
+            numberCur[1].CreateTexture("image/1.png", renderer);
+            numberCur[2].CreateTexture("image/2.png", renderer);
+            numberCur[3].CreateTexture("image/3.png", renderer);
+            numberCur[4].CreateTexture("image/4.png", renderer);
+            numberCur[5].CreateTexture("image/5.png", renderer);
+            numberCur[6].CreateTexture("image/6.png", renderer);
+            numberCur[7].CreateTexture("image/7.png", renderer);
+            numberCur[8].CreateTexture("image/8.png", renderer);
+            numberCur[9].CreateTexture("image/9.png", renderer);
+
+
+            numberBest[0].CreateTexture("image/0.png", renderer);
+            numberBest[1].CreateTexture("image/1.png", renderer);
+            numberBest[2].CreateTexture("image/2.png", renderer);
+            numberBest[3].CreateTexture("image/3.png", renderer);
+            numberBest[4].CreateTexture("image/4.png", renderer);
+            numberBest[5].CreateTexture("image/5.png", renderer);
+            numberBest[6].CreateTexture("image/6.png", renderer);
+            numberBest[7].CreateTexture("image/7.png", renderer);
+            numberBest[8].CreateTexture("image/8.png", renderer);
+            numberBest[9].CreateTexture("image/9.png", renderer);
+
+
+
+            OkButton.CreateTexture("image/ok.png", renderer);
+            CopperIcon.CreateTexture("image/copper.png", renderer);
+            SilverIcon.CreateTexture("image/silver.png", renderer);
+            GoldIcon.CreateTexture("image/gold.png", renderer);
         }
     }
 }
@@ -130,13 +179,13 @@ void GameLoop::Event()
     {
         ground[i].Move();
             if(ground[i].getDest().x < -GROUND_WIDTH)
-                ground[i].SetGround(ground[(i+2)%3].getDest().x + GROUND_WIDTH - 50);
+                ground[i].SetGround(ground[(i+7)%8].getDest().x + GROUND_WIDTH - 50);
     }
 
 
     if(ColUp[CurCol].getDest().x <= 60)
     {
-        Score++;
+        CurScore++;
         CurCol++;
         if(CurCol == 8) CurCol = 0;
     }
@@ -174,13 +223,14 @@ void GameLoop::Event()
 
     if(Die)
     {
-        if(event1.key.keysym.sym == SDLK_r)
+        Start = false;
+        if(OkButton.HandleEvent(&event1))
         {
             PlayAgain();
             Die = false;
-            Start = false;
             AliveBird.Revive();
-            Score = 0;
+            CurScore = 0;
+            CurCol = 0;
             for(int j=0; j<8; j++)
             {
                 ground[j].Continue();
@@ -189,16 +239,18 @@ void GameLoop::Event()
             }
         }
     }
+
 }
 
 
 void GameLoop::Render()
 {
 	SDL_RenderClear(renderer);
-	b.NormalRender(renderer);
+	Back.NormalRender(renderer);
 
     if(!Start)
-        guide.AdvanceRender(renderer, guide.getSrc(), guide.getDest());
+        if(!Die)
+            guide.AdvanceRender(renderer, guide.getSrc(), guide.getDest());
 
     if(!Die)
         AliveBird.AliveRender(renderer, AliveBird.getSrc(), AliveBird.getDest());
@@ -215,13 +267,15 @@ void GameLoop::Render()
 
     if(Start)
     {
-        if(Score<10)
+        if(CurScore<10)
         {
-            number[Score].AdvanceRender(renderer, number[Score].getSrc(), number[Score].getDest());
+            int c = CurScore;
+            numberCount[c].setDest(20, 20, 24, 36);
+            numberCount[c].AdvanceRender(renderer, numberCount[c].getSrc(), numberCount[c].getDest());
         }
         else
         {
-            int tem = Score;
+            int tem = CurScore;
             vector<int> digits;
             while(tem>0)
             {
@@ -231,22 +285,91 @@ void GameLoop::Render()
             int n = digits.size();
             for(int i=n-1; i>=0; i--)
             {
-                number[digits[i]].setDest(20 + 24*(n-i-1), 20, 24, 36);
-                number[digits[i]].AdvanceRender(renderer, number[digits[i]].getSrc(), number[digits[i]].getDest());
+                int d = digits[i];
+                numberCount[d].setDest(20 + 24*(n-i-1), 20, 24, 36);
+                numberCount[d].AdvanceRender(renderer, numberCount[d].getSrc(), numberCount[d].getDest());
             }
-
         }
 
     }
 
+
 	if(Die)
     {
-        d.AdvanceRender(renderer, d.getSrc(), d.getDest());
+        GameOver.AdvanceRender(renderer, GameOver.getSrc(), GameOver.getDest());
         DieBird.DieRender(renderer, AliveBird.getSrc(), AliveBird.getDest());
+        ScoreBoard.AdvanceRender(renderer, ScoreBoard.getSrc(), ScoreBoard.getDest());
+        OkButton.Render(renderer, OkButton.getSrc(), OkButton.getDest());
+        if(CurScore >= 1 && CurScore < 10)
+            CopperIcon.AdvanceRender(renderer, CopperIcon.getSrc(), CopperIcon.getDest());
+        else if(CurScore >= 10 && CurScore < 50)
+            SilverIcon.AdvanceRender(renderer, SilverIcon.getSrc(), SilverIcon.getDest());
+        else if(CurScore >= 50)
+            GoldIcon.AdvanceRender(renderer, GoldIcon.getSrc(), GoldIcon.getDest());
+
+
+        //show Curscore in board
+        if(CurScore<10)
+        {
+            int c = CurScore;
+            numberCur[c].setDest(415, 270, 20, 30);
+            numberCur[c].AdvanceRender(renderer, numberCur[c].getSrc(), numberCur[c].getDest());
+        }
+        else
+        {
+            int tem = CurScore;
+            vector<int> digits;
+            while(tem>0)
+            {
+                digits.push_back(tem%10);
+                tem/=10;
+            }
+            int n = digits.size();
+            for(int i=0; i<n; i++)
+            {
+                int d = digits[i];
+                numberCur[d].setDest(415 - 20*i, 270, 20, 30);
+                numberCur[d].AdvanceRender(renderer, numberCur[d].getSrc(), numberCur[d].getDest());
+            }
+        }
+
+
+        //show BestScore in board
+        if(BestScore < CurScore){
+            CheckNew = 1;
+            BestScore = CurScore;
+        }
+
+        if(CheckNew)
+            New.AdvanceRender(renderer, New.getSrc(), New.getDest());
+
+        if(BestScore<10)
+        {
+            int b = BestScore;
+            numberBest[b].setDest(415, 330, 20, 30);
+            numberBest[b].AdvanceRender(renderer, numberBest[b].getSrc(), numberBest[b].getDest());
+        }
+        else
+        {
+            int tem = BestScore;
+            vector<int> digits;
+            while(tem>0)
+            {
+                digits.push_back(tem%10);
+                tem/=10;
+            }
+            int n = digits.size();
+            for(int i=0; i<n; i++)
+            {
+                numberBest[digits[i]].setDest(415 - 20*i, 330, 24, 36);
+                numberBest[digits[i]].AdvanceRender(renderer, numberBest[digits[i]].getSrc(), numberBest[digits[i]].getDest());
+            }
+        }
     }
 
 	SDL_RenderPresent(renderer);
 }
+
 
 
 void GameLoop::Clear()
@@ -257,4 +380,4 @@ void GameLoop::Clear()
 
 
 
-
+void hello();

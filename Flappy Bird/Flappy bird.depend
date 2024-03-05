@@ -864,7 +864,7 @@
 1708783731 source:c:\github\ltnc_game\flappy bird\background.cpp
 	"Background.h"
 
-1708783720 c:\github\ltnc_game\flappy bird\background.h
+1709307148 c:\github\ltnc_game\flappy bird\background.h
 	<iostream>
 	"Object.h"
 
@@ -887,21 +887,23 @@
 	"Object.h"
 	"Col.h"
 
-1708784752 source:c:\github\ltnc_game\flappy bird\gameloop.cpp
+1709391937 source:c:\github\ltnc_game\flappy bird\gameloop.cpp
 	<bits/stdc++.h>
 	"GameLoop.h"
 
-1708784245 c:\github\ltnc_game\flappy bird\gameloop.h
+1709390839 c:\github\ltnc_game\flappy bird\gameloop.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
 	<iostream>
+	<vector>
 	"Player.h"
 	"Object.h"
 	"Background.h"
 	"Col.h"
+	"Button.h"
 
-1708783276 source:c:\github\ltnc_game\flappy bird\main.cpp
+1709391542 source:c:\github\ltnc_game\flappy bird\main.cpp
 	<iostream>
 	"GameLoop.h"
 
@@ -1318,4 +1320,12 @@
 	"SDL.h"
 	"begin_code.h"
 	"close_code.h"
+
+1709389974 c:\github\ltnc_game\flappy bird\button.h
+	"Object.h"
+	"SDL.h"
+
+1709389971 source:c:\github\ltnc_game\flappy bird\button.cpp
+	"Button.h"
+	"SDL.h"
 

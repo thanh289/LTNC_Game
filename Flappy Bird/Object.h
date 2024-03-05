@@ -21,3 +21,4 @@ class Object
 
         //void virtual Render(SDL_Renderer* ren)=0;
 };
+
