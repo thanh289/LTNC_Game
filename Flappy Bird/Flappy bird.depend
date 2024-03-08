@@ -868,7 +868,7 @@
 	<iostream>
 	"Object.h"
 
-1708358986 c:\github\ltnc_game\flappy bird\object.h
+1709621596 c:\github\ltnc_game\flappy bird\object.h
 	<SDL.h>
 	"TextureManager.h"
 
@@ -883,15 +883,15 @@
 	"Object.h"
 	"Player.h"
 
-1708784689 c:\github\ltnc_game\flappy bird\player.h
+1709888968 c:\github\ltnc_game\flappy bird\player.h
 	"Object.h"
 	"Col.h"
 
-1709391937 source:c:\github\ltnc_game\flappy bird\gameloop.cpp
+1709888938 source:c:\github\ltnc_game\flappy bird\gameloop.cpp
 	<bits/stdc++.h>
 	"GameLoop.h"
 
-1709390839 c:\github\ltnc_game\flappy bird\gameloop.h
+1709888948 c:\github\ltnc_game\flappy bird\gameloop.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
@@ -911,7 +911,7 @@
 	"Object.h"
 	"TextureManager.h"
 
-1708784709 source:c:\github\ltnc_game\flappy bird\player.cpp
+1709889289 source:c:\github\ltnc_game\flappy bird\player.cpp
 	"Player.h"
 
 1708247098 source:c:\github\ltnc_game\flappy bird\texturemanager.cpp

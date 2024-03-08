@@ -36,14 +36,22 @@ void Player::Gravity()
 		Ypos += gravity + accelerator + jumpHeight;
 		setDest(50, Ypos, 34, 24);
 
+		if(Ypos<0){
+            Ypos = 0;
+            Ypos += 2;
+		}
 	}
 
 }
 
 void Player::Jump()
 {
-    accelerator = 0;
-    inJump = true;
+    if(SDL_GetTicks() - curJumpTime > 150)
+    {
+        accelerator = 0;
+        inJump = true;
+        curJumpTime = SDL_GetTicks();
+    }
 }
 
 

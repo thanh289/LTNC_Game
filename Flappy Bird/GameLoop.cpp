@@ -167,10 +167,10 @@ void GameLoop::Event()
 		GameState = false;
 	}
 
-    if(event1.type == SDL_MOUSEBUTTONDOWN || event1.key.keysym.sym == SDLK_j)
+    if(event1.type == SDL_MOUSEBUTTONDOWN || event1.key.keysym.sym == SDLK_SPACE)
     {
-        Start =true;
-        AliveBird.Jump();
+            Start =true;
+            AliveBird.Jump();
     }
     AliveBird.Gravity();
 
@@ -224,7 +224,7 @@ void GameLoop::Event()
     if(Die)
     {
         Start = false;
-        if(OkButton.HandleEvent(&event1))
+        if(OkButton.HandleEvent(&event1) || event1.key.keysym.sym  == SDLK_RETURN)
         {
             PlayAgain();
             Die = false;
