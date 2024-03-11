@@ -883,11 +883,11 @@
 	"Object.h"
 	"Player.h"
 
-1709888968 c:\github\ltnc_game\flappy bird\player.h
+1709907914 c:\github\ltnc_game\flappy bird\player.h
 	"Object.h"
 	"Col.h"
 
-1709888938 source:c:\github\ltnc_game\flappy bird\gameloop.cpp
+1709889380 source:c:\github\ltnc_game\flappy bird\gameloop.cpp
 	<bits/stdc++.h>
 	"GameLoop.h"
 
@@ -911,7 +911,7 @@
 	"Object.h"
 	"TextureManager.h"
 
-1709889289 source:c:\github\ltnc_game\flappy bird\player.cpp
+1709907925 source:c:\github\ltnc_game\flappy bird\player.cpp
 	"Player.h"
 
 1708247098 source:c:\github\ltnc_game\flappy bird\texturemanager.cpp

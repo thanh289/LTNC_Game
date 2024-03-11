@@ -13,7 +13,7 @@ class Player :public Object
         SDL_Texture* Tex1;
         SDL_Texture* Tex2;
         int animationTimer = 0;
-        Uint32 curJumpTime = 0;
+//        Uint32 curJumpTime = 0;
 
 
     public:
