@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 #include <iostream>
 #include <vector>
 #include "Player.h"
@@ -9,6 +10,7 @@
 #include "Background.h"
 #include "Col.h"
 #include "Button.h"
+#include "Music.h"
 using namespace std;
 
 class GameLoop
@@ -37,6 +39,10 @@ private:
     Collumn ColUp[8];
     Collumn ColDown[8];
     Button OkButton;
+    Music flyMu;
+    Music getHit;
+    Music getPoint;
+    Music themeSong;
 	int XGround = 0;
 	int YCol;
 	int CurScore = 0;
@@ -46,12 +52,14 @@ private:
 	bool GameState;
 	bool Start = false;
 	bool Die = false;
+	bool SoundOn = true;
 	SDL_Window* window;
 	SDL_Event event1;
 	SDL_Renderer* renderer;
 public:
 	GameLoop();
 	bool getGameState();
+	void PlayThemeSong();
 	void PlayAgain();
 	void Initialize();
 	void Event();

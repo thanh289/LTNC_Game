@@ -887,14 +887,15 @@
 	"Object.h"
 	"Col.h"
 
-1709889380 source:c:\github\ltnc_game\flappy bird\gameloop.cpp
+1711352955 source:c:\github\ltnc_game\flappy bird\gameloop.cpp
 	<bits/stdc++.h>
 	"GameLoop.h"
 
-1709888948 c:\github\ltnc_game\flappy bird\gameloop.h
+1711202291 c:\github\ltnc_game\flappy bird\gameloop.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
+	<SDL_mixer.h>
 	<iostream>
 	<vector>
 	"Player.h"
@@ -902,10 +903,12 @@
 	"Background.h"
 	"Col.h"
 	"Button.h"
+	"Music.h"
 
-1709391542 source:c:\github\ltnc_game\flappy bird\main.cpp
+1711352866 source:c:\github\ltnc_game\flappy bird\main.cpp
 	<iostream>
 	"GameLoop.h"
+	"Music.h"
 
 1708502899 source:c:\github\ltnc_game\flappy bird\object.cpp
 	"Object.h"
@@ -1321,11 +1324,26 @@
 	"begin_code.h"
 	"close_code.h"
 
-1709389974 c:\github\ltnc_game\flappy bird\button.h
+1711179740 c:\github\ltnc_game\flappy bird\button.h
 	"Object.h"
-	"SDL.h"
+	<SDL.h>
 
 1709389971 source:c:\github\ltnc_game\flappy bird\button.cpp
 	"Button.h"
 	"SDL.h"
+
+1705857742 c:\github\ltnc_game\mingw_dev_lib\i686-w64-mingw32 (mixer)\include\sdl2\sdl_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1711182814 c:\github\ltnc_game\flappy bird\music.h
+	<SDL_mixer.h>
+
+1711182836 source:c:\github\ltnc_game\flappy bird\music.cpp
+	"Music.h"
 

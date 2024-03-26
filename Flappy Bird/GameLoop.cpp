@@ -4,6 +4,7 @@
 using namespace std;
 
 
+
 GameLoop::GameLoop()
 {
 	window = NULL;
@@ -90,73 +91,87 @@ void GameLoop::Initialize()
     }
     else
     {
-        renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-        if(renderer == NULL)
-            cout<<"Failed to create renderer! Error: "<<SDL_GetError();
+        if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0)
+            cout<<"Failed to init mixer! Error: "<<Mix_GetError();
         else
         {
-            GameState = true;
+            renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+            if(renderer == NULL)
+                cout<<"Failed to create renderer! Error: "<<SDL_GetError();
+            else
+            {
+                GameState = true;
 
-            guide.CreateTexture("image/message.png", renderer);
-            GameOver.CreateTexture("image/gameover.png", renderer);
-            ScoreBoard.CreateTexture("image/score-board.png", renderer);
-            New.CreateTexture("image/new.png", renderer);
-            AliveBird.CreateTexture("image/yellowbird1.png", renderer);
-            AliveBird.CreateTexture1("image/yellowbird2.png", renderer);
-            AliveBird.CreateTexture2("image/yellowbird3.png", renderer);
-            DieBird.CreateTexture("image/yellowbird4.png", renderer);
-            Back.CreateTexture("image/background.png", renderer);
-            for(int i=0; i<8; i++)
-                ground[i].CreateTexture("image/base.png", renderer);
-            for(int i=0; i<8; i++)
-                ColUp[i].CreateTexture("image/pipe-green-up.png", renderer);
-            for(int i=0; i<8; i++)
-                ColDown[i].CreateTexture("image/pipe-green-down.png", renderer);
+                guide.CreateTexture("image/message.png", renderer);
+                GameOver.CreateTexture("image/gameover.png", renderer);
+                ScoreBoard.CreateTexture("image/score-board.png", renderer);
+                New.CreateTexture("image/new.png", renderer);
+                AliveBird.CreateTexture("image/yellowbird1.png", renderer);
+                AliveBird.CreateTexture1("image/yellowbird2.png", renderer);
+                AliveBird.CreateTexture2("image/yellowbird3.png", renderer);
+                DieBird.CreateTexture("image/yellowbird4.png", renderer);
+                Back.CreateTexture("image/background.png", renderer);
+                for(int i=0; i<8; i++)
+                    ground[i].CreateTexture("image/base.png", renderer);
+                for(int i=0; i<8; i++)
+                    ColUp[i].CreateTexture("image/pipe-green-up.png", renderer);
+                for(int i=0; i<8; i++)
+                    ColDown[i].CreateTexture("image/pipe-green-down.png", renderer);
 
-            numberCount[0].CreateTexture("image/0.png", renderer);
-            numberCount[1].CreateTexture("image/1.png", renderer);
-            numberCount[2].CreateTexture("image/2.png", renderer);
-            numberCount[3].CreateTexture("image/3.png", renderer);
-            numberCount[4].CreateTexture("image/4.png", renderer);
-            numberCount[5].CreateTexture("image/5.png", renderer);
-            numberCount[6].CreateTexture("image/6.png", renderer);
-            numberCount[7].CreateTexture("image/7.png", renderer);
-            numberCount[8].CreateTexture("image/8.png", renderer);
-            numberCount[9].CreateTexture("image/9.png", renderer);
+                numberCount[0].CreateTexture("image/0.png", renderer);
+                numberCount[1].CreateTexture("image/1.png", renderer);
+                numberCount[2].CreateTexture("image/2.png", renderer);
+                numberCount[3].CreateTexture("image/3.png", renderer);
+                numberCount[4].CreateTexture("image/4.png", renderer);
+                numberCount[5].CreateTexture("image/5.png", renderer);
+                numberCount[6].CreateTexture("image/6.png", renderer);
+                numberCount[7].CreateTexture("image/7.png", renderer);
+                numberCount[8].CreateTexture("image/8.png", renderer);
+                numberCount[9].CreateTexture("image/9.png", renderer);
 
-            numberCur[0].CreateTexture("image/0.png", renderer);
-            numberCur[1].CreateTexture("image/1.png", renderer);
-            numberCur[2].CreateTexture("image/2.png", renderer);
-            numberCur[3].CreateTexture("image/3.png", renderer);
-            numberCur[4].CreateTexture("image/4.png", renderer);
-            numberCur[5].CreateTexture("image/5.png", renderer);
-            numberCur[6].CreateTexture("image/6.png", renderer);
-            numberCur[7].CreateTexture("image/7.png", renderer);
-            numberCur[8].CreateTexture("image/8.png", renderer);
-            numberCur[9].CreateTexture("image/9.png", renderer);
-
-
-            numberBest[0].CreateTexture("image/0.png", renderer);
-            numberBest[1].CreateTexture("image/1.png", renderer);
-            numberBest[2].CreateTexture("image/2.png", renderer);
-            numberBest[3].CreateTexture("image/3.png", renderer);
-            numberBest[4].CreateTexture("image/4.png", renderer);
-            numberBest[5].CreateTexture("image/5.png", renderer);
-            numberBest[6].CreateTexture("image/6.png", renderer);
-            numberBest[7].CreateTexture("image/7.png", renderer);
-            numberBest[8].CreateTexture("image/8.png", renderer);
-            numberBest[9].CreateTexture("image/9.png", renderer);
+                numberCur[0].CreateTexture("image/0.png", renderer);
+                numberCur[1].CreateTexture("image/1.png", renderer);
+                numberCur[2].CreateTexture("image/2.png", renderer);
+                numberCur[3].CreateTexture("image/3.png", renderer);
+                numberCur[4].CreateTexture("image/4.png", renderer);
+                numberCur[5].CreateTexture("image/5.png", renderer);
+                numberCur[6].CreateTexture("image/6.png", renderer);
+                numberCur[7].CreateTexture("image/7.png", renderer);
+                numberCur[8].CreateTexture("image/8.png", renderer);
+                numberCur[9].CreateTexture("image/9.png", renderer);
 
 
+                numberBest[0].CreateTexture("image/0.png", renderer);
+                numberBest[1].CreateTexture("image/1.png", renderer);
+                numberBest[2].CreateTexture("image/2.png", renderer);
+                numberBest[3].CreateTexture("image/3.png", renderer);
+                numberBest[4].CreateTexture("image/4.png", renderer);
+                numberBest[5].CreateTexture("image/5.png", renderer);
+                numberBest[6].CreateTexture("image/6.png", renderer);
+                numberBest[7].CreateTexture("image/7.png", renderer);
+                numberBest[8].CreateTexture("image/8.png", renderer);
+                numberBest[9].CreateTexture("image/9.png", renderer);
 
-            OkButton.CreateTexture("image/ok.png", renderer);
-            CopperIcon.CreateTexture("image/copper.png", renderer);
-            SilverIcon.CreateTexture("image/silver.png", renderer);
-            GoldIcon.CreateTexture("image/gold.png", renderer);
+
+
+                OkButton.CreateTexture("image/ok.png", renderer);
+                CopperIcon.CreateTexture("image/copper.png", renderer);
+                SilverIcon.CreateTexture("image/silver.png", renderer);
+                GoldIcon.CreateTexture("image/gold.png", renderer);
+
+                flyMu.loadChunk("sound/sfx_wing.wav");
+                getHit.loadChunk("sound/sfx_hit.wav");
+                getPoint.loadChunk("sound/sfx_point.wav");
+                themeSong.loadMusic("sound/Colorful-Flowers(chosic.com).mp3");
+            }
         }
     }
 }
 
+void GameLoop::PlayThemeSong()
+{
+    themeSong.playMusic();
+}
 
 void GameLoop::Event()
 {
@@ -170,9 +185,10 @@ void GameLoop::Event()
     if(event1.type == SDL_MOUSEBUTTONDOWN || event1.key.keysym.sym == SDLK_SPACE)
     {
             Start =true;
-            AliveBird.Jump();
+            if(Start) AliveBird.Jump();
+            if(SoundOn) flyMu.playChunk();
     }
-    AliveBird.Gravity();
+    if(Start) AliveBird.Gravity();
 
 
     for(int i=0; i<8; i++)
@@ -187,7 +203,12 @@ void GameLoop::Event()
     {
         CurScore++;
         CurCol++;
+        if(SoundOn) getPoint.playChunk();
         if(CurCol == 8) CurCol = 0;
+    }
+    if(BestScore < CurScore){
+        CheckNew = 1;
+        BestScore = CurScore;
     }
 
 
@@ -209,6 +230,9 @@ void GameLoop::Event()
             if(AliveBird.GetCollision(ColUp[i].getDest(), COL_WIDTH, COL_HEIGHT) || AliveBird.GetCollision(ColDown[i].getDest(), COL_WIDTH, COL_HEIGHT) || AliveBird.GetCollision(ground[i].getDest(), GROUND_WIDTH, GROUND_HEIGHT))
             {
                 AliveBird.Die();
+                if(SoundOn)getHit.playChunk();
+                themeSong.pauseMusic();
+                SoundOn = false;
                 Die = true;
                 for(int j=0; j<8; j++)
                 {
@@ -228,6 +252,8 @@ void GameLoop::Event()
         {
             PlayAgain();
             Die = false;
+            SoundOn = true;
+            themeSong.playMusic();
             AliveBird.Revive();
             CurScore = 0;
             CurCol = 0;
@@ -245,6 +271,8 @@ void GameLoop::Event()
 
 void GameLoop::Render()
 {
+
+
 	SDL_RenderClear(renderer);
 	Back.NormalRender(renderer);
 
@@ -273,6 +301,7 @@ void GameLoop::Render()
             numberCount[c].setDest(20, 20, 24, 36);
             numberCount[c].AdvanceRender(renderer, numberCount[c].getSrc(), numberCount[c].getDest());
         }
+
         else
         {
             int tem = CurScore;
@@ -335,11 +364,6 @@ void GameLoop::Render()
 
 
         //show BestScore in board
-        if(BestScore < CurScore){
-            CheckNew = 1;
-            BestScore = CurScore;
-        }
-
         if(CheckNew)
             New.AdvanceRender(renderer, New.getSrc(), New.getDest());
 
@@ -361,7 +385,7 @@ void GameLoop::Render()
             int n = digits.size();
             for(int i=0; i<n; i++)
             {
-                numberBest[digits[i]].setDest(415 - 20*i, 330, 24, 36);
+                numberBest[digits[i]].setDest(415 - 20*i, 330, 20, 30);
                 numberBest[digits[i]].AdvanceRender(renderer, numberBest[digits[i]].getSrc(), numberBest[digits[i]].getDest());
             }
         }
@@ -379,5 +403,3 @@ void GameLoop::Clear()
 }
 
 
-
-void hello();
