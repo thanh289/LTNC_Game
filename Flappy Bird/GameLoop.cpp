@@ -1,7 +1,9 @@
+
 #include <bits/stdc++.h>
 #include"GameLoop.h"
 
 using namespace std;
+
 
 
 
@@ -43,13 +45,13 @@ GameLoop::GameLoop()
         numberCur[i].setSrc(0, 0, 24, 36);
         numberBest[i].setSrc(0, 0, 24, 36);
     }
-
 }
 
 bool GameLoop::getGameState()
 {
 	return GameState;
 }
+
 
 void GameLoop::PlayAgain()
 {
@@ -173,8 +175,23 @@ void GameLoop::PlayThemeSong()
     themeSong.playMusic();
 }
 
+void GameLoop::SaveBestScore()
+{
+    fstream file("score.txt");
+    file<<BestScore;
+    file.close();
+}
+void GameLoop::TakeBestScore()
+{
+    fstream file("score.txt");
+    file>>BestScore;
+    file.close();
+}
+
+
 void GameLoop::Event()
 {
+    TakeBestScore();
 
     SDL_PollEvent(&event1);
 	if (event1.type == SDL_QUIT)
@@ -209,7 +226,9 @@ void GameLoop::Event()
     if(BestScore < CurScore){
         CheckNew = 1;
         BestScore = CurScore;
+        SaveBestScore();
     }
+
 
 
     if(Start)
@@ -253,7 +272,7 @@ void GameLoop::Event()
             PlayAgain();
             Die = false;
             SoundOn = true;
-            themeSong.playMusic();
+//            themeSong.resumeMusic();
             AliveBird.Revive();
             CurScore = 0;
             CurCol = 0;
@@ -401,5 +420,6 @@ void GameLoop::Clear()
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 }
+
 
 

@@ -46,12 +46,9 @@ void Player::Gravity()
 
 void Player::Jump()
 {
-//    if(SDL_GetTicks() - curJumpTime > 150)
-//    {
         accelerator = 0;
         inJump = true;
-//        curJumpTime = SDL_GetTicks();
-//    }
+
 }
 
 

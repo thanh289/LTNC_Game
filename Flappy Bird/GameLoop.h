@@ -60,6 +60,8 @@ public:
 	GameLoop();
 	bool getGameState();
 	void PlayThemeSong();
+	void SaveBestScore();
+	void TakeBestScore();
 	void PlayAgain();
 	void Initialize();
 	void Event();

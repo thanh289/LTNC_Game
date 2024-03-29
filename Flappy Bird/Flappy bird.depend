@@ -887,11 +887,11 @@
 	"Object.h"
 	"Col.h"
 
-1711352955 source:c:\github\ltnc_game\flappy bird\gameloop.cpp
+1711610252 source:c:\github\ltnc_game\flappy bird\gameloop.cpp
 	<bits/stdc++.h>
 	"GameLoop.h"
 
-1711202291 c:\github\ltnc_game\flappy bird\gameloop.h
+1711603774 c:\github\ltnc_game\flappy bird\gameloop.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
@@ -905,7 +905,7 @@
 	"Button.h"
 	"Music.h"
 
-1711352866 source:c:\github\ltnc_game\flappy bird\main.cpp
+1711609298 source:c:\github\ltnc_game\flappy bird\main.cpp
 	<iostream>
 	"GameLoop.h"
 	"Music.h"

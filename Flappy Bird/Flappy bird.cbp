@@ -59,6 +59,7 @@
 		<Unit filename="TextureManager.cpp" />
 		<Unit filename="TextureManager.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="score.txt" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
