@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL.h>
-#include "TextureManager.h"
+#include <SDL_image.h>
 
 
 class Object
@@ -16,9 +16,8 @@ class Object
         void CreateTexture(const char* address, SDL_Renderer* ren);
 
         SDL_Texture* getTexture();
-        SDL_Rect getSrc();
-        SDL_Rect getDest();
+        SDL_Rect& getSrc();
+        SDL_Rect& getDest();
 
-        //void virtual Render(SDL_Renderer* ren)=0;
 };
 

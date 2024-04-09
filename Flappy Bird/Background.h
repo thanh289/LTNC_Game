@@ -9,9 +9,7 @@ private:
     bool GroundState = true;
 public:
 
-	void NormalRender(SDL_Renderer* ren);
-
-	void AdvanceRender(SDL_Renderer* ren, SDL_Rect src, SDL_Rect dest);
+	void Render(SDL_Renderer* ren);
 
 	void SetGround(int x);
 

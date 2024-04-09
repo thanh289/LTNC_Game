@@ -8,28 +8,30 @@ void Collumn::SetPos(int x, int y)
     setDest(Xpos, Ypos, 52, 320);
 }
 
-void Collumn::CollumnRender(SDL_Renderer* ren, SDL_Rect src, SDL_Rect dest)
+void Collumn::CollumnRender(SDL_Renderer* ren)
 {
-    SDL_RenderCopy(ren, getTexture(), &src, &dest);
+    SDL_RenderCopy(ren, getTexture(), &getSrc(), &getDest());
+}
+
+void Collumn::ColMove()
+{
+    if(ColState)
+    {
+        Xpos-=3;
+        setDest(Xpos, Ypos , 53, 320);
+    }
 }
 
 void Collumn::MoveUp()
 {
-    if(ColState)
-    {
-        Xpos-=3;
-        setDest(Xpos, Ypos , 53, 320);
-    }
+    Ypos -= 0.5;
+    setDest(Xpos, Ypos, 53, 320);
 }
-
 
 void Collumn::MoveDown()
 {
-    if(ColState)
-    {
-        Xpos-=3;
-        setDest(Xpos, Ypos , 53, 320);
-    }
+    Ypos += 0.5;
+    setDest(Xpos, Ypos, 53, 320);
 }
 
 void Collumn::Stop()

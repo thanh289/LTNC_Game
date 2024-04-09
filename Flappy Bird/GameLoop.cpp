@@ -9,6 +9,7 @@ using namespace std;
 
 GameLoop::GameLoop()
 {
+
 	window = NULL;
 	renderer = NULL;
 	GameState = false;
@@ -16,12 +17,22 @@ GameLoop::GameLoop()
 	guide.setDest((SCREEN_WIDTH-184)/2, (SCREEN_HEIGHT-267)/2, 184, 267);
 	GameOver.setSrc(0, 0, 192, 42);
 	GameOver.setDest((SCREEN_WIDTH-192)/2, (SCREEN_HEIGHT-42)/4, 192, 42);
-	ScoreBoard.setSrc(0, 0, 113, 57);
+	ScoreBoard.setSrc(0, 0, 250, 128);
 	ScoreBoard.setDest((SCREEN_WIDTH-339)/2, 220, 339, 171);
+	PauseBoard.setSrc(0, 0, 250, 128);
+	PauseBoard.setDest((SCREEN_WIDTH-339)/2, 220, 339, 171);
 	New.setSrc(0, 0, 16, 7);
 	New.setDest(345, 310, 32, 14);
 	OkButton.setSrc(0, 0, 80, 28);
 	OkButton.setDest((SCREEN_WIDTH-80)/2, 400, 80, 28);
+	PauseButton.setSrc(0, 0, 26, 28);
+	PauseButton.setDest(SCREEN_WIDTH-40, 15, 26, 28);
+	SoundIconOn.setSrc(0, 0, 32, 24);
+	SoundIconOn.setDest(210, 270, 32, 24);
+	SoundIconOff.setSrc(0, 0, 32, 24);
+	SoundIconOff.setDest(205, 270, 32, 24);
+	BgTheme.setSrc(0, 0, 55, 58);
+	BgTheme.setDest(210, 330, 32, 32);
     CopperIcon.setSrc(0, 0, 66, 66);
     CopperIcon.setDest(170, 280, 66, 66);
     SilverIcon.setSrc(0, 0, 66, 66);
@@ -35,9 +46,9 @@ GameLoop::GameLoop()
         ground[i].SetGround(i*GROUND_WIDTH - 50);
 	for(int i=0; i<8; i++)
     {
-        YCol = rand() % 150;
-        ColUp[i].SetPos((SCREEN_WIDTH + 170*i+400), -YCol);
-        ColDown[i].SetPos((SCREEN_WIDTH + 170*i+400), (-YCol + COL_HEIGHT + 100));
+        YCol = rand() % 200;
+        ColUp[i].SetPos((SCREEN_WIDTH + 170*i+100), -YCol);
+        ColDown[i].SetPos((SCREEN_WIDTH + 170*i+100), (-YCol + COL_HEIGHT + 100));
     }
     for(int i=0; i<10; i++)
     {
@@ -45,11 +56,19 @@ GameLoop::GameLoop()
         numberCur[i].setSrc(0, 0, 24, 36);
         numberBest[i].setSrc(0, 0, 24, 36);
     }
-}
 
-bool GameLoop::getGameState()
-{
-	return GameState;
+    Back[0].setSrc(0, 0, 800, 640);
+    Back[0].setDest(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    Back[1].setSrc(0, 0, 640, 600);
+    Back[1].setDest(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    Back[2].setSrc(0, 0, 600, 504);
+    Back[2].setDest(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    Back[3].setSrc(0, 0, 1153, 1080);
+    Back[3].setDest(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    Back[4].setSrc(0, 0, 820, 640);
+    Back[4].setDest(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+
 }
 
 
@@ -69,8 +88,8 @@ void GameLoop::PlayAgain()
 	for(int i=0; i<8; i++)
     {
         YCol = rand() % 150;
-        ColUp[i].SetPos((SCREEN_WIDTH + 170*i+400), -YCol);
-        ColDown[i].SetPos((SCREEN_WIDTH + 170*i+400), (-YCol + COL_HEIGHT + 100));
+        ColUp[i].SetPos((SCREEN_WIDTH + 170*i+100), -YCol);
+        ColDown[i].SetPos((SCREEN_WIDTH + 170*i+100), (-YCol + COL_HEIGHT + 100));
     }
 
     for(int i=0; i<10; i++)
@@ -79,7 +98,14 @@ void GameLoop::PlayAgain()
         numberCount[i].setDest(20, 20, 24, 36);
     }
 
+    themeSong.playMusic();
     CheckNew = 0;
+}
+
+
+bool GameLoop::getGameState()
+{
+	return GameState;
 }
 
 
@@ -107,12 +133,18 @@ void GameLoop::Initialize()
                 guide.CreateTexture("image/message.png", renderer);
                 GameOver.CreateTexture("image/gameover.png", renderer);
                 ScoreBoard.CreateTexture("image/score-board.png", renderer);
+                PauseBoard.CreateTexture("image/pauseTab.png", renderer);
                 New.CreateTexture("image/new.png", renderer);
                 AliveBird.CreateTexture("image/yellowbird1.png", renderer);
                 AliveBird.CreateTexture1("image/yellowbird2.png", renderer);
                 AliveBird.CreateTexture2("image/yellowbird3.png", renderer);
-                DieBird.CreateTexture("image/yellowbird4.png", renderer);
-                Back.CreateTexture("image/background.png", renderer);
+
+                Back[0].CreateTexture("image/background.png", renderer);
+                Back[1].CreateTexture("image/background night.jpg", renderer);
+                Back[2].CreateTexture("image/background cloudy.png", renderer);
+                Back[3].CreateTexture("image/background sunshine.jpg", renderer);
+                Back[4].CreateTexture("image/background tree.jpg", renderer);
+
                 for(int i=0; i<8; i++)
                     ground[i].CreateTexture("image/base.png", renderer);
                 for(int i=0; i<8; i++)
@@ -157,6 +189,10 @@ void GameLoop::Initialize()
 
 
                 OkButton.CreateTexture("image/ok.png", renderer);
+                PauseButton.CreateTexture("image/pause.png", renderer);
+                SoundIconOn.CreateTexture("image/SoundOn.png", renderer);
+                SoundIconOff.CreateTexture("image/SoundOff.png", renderer);
+                BgTheme.CreateTexture("image/change theme.jpg", renderer);
                 CopperIcon.CreateTexture("image/copper.png", renderer);
                 SilverIcon.CreateTexture("image/silver.png", renderer);
                 GoldIcon.CreateTexture("image/gold.png", renderer);
@@ -164,6 +200,7 @@ void GameLoop::Initialize()
                 flyMu.loadChunk("sound/sfx_wing.wav");
                 getHit.loadChunk("sound/sfx_hit.wav");
                 getPoint.loadChunk("sound/sfx_point.wav");
+                click.loadChunk("sound/sfx_click.wav");
                 themeSong.loadMusic("sound/Colorful-Flowers(chosic.com).mp3");
             }
         }
@@ -172,6 +209,7 @@ void GameLoop::Initialize()
 
 void GameLoop::PlayThemeSong()
 {
+
     themeSong.playMusic();
 }
 
@@ -189,9 +227,17 @@ void GameLoop::TakeBestScore()
 }
 
 
+
+
 void GameLoop::Event()
 {
+
     TakeBestScore();
+
+    if(!SoundOn || Pause || Die)
+        themeSong.pauseMusic();
+    else themeSong.resumeMusic();
+
 
     SDL_PollEvent(&event1);
 	if (event1.type == SDL_QUIT)
@@ -199,11 +245,11 @@ void GameLoop::Event()
 		GameState = false;
 	}
 
-    if(event1.type == SDL_MOUSEBUTTONDOWN || event1.key.keysym.sym == SDLK_SPACE)
+    if((event1.type == SDL_MOUSEBUTTONDOWN || event1.key.keysym.sym == SDLK_SPACE) && !PauseButton.HandleEvent(&event1) && !Die)
     {
-            Start =true;
+            if(!Pause) Start =true;
             if(Start) AliveBird.Jump();
-            if(SoundOn) flyMu.playChunk();
+            if(SoundOn && !Pause && !Die) flyMu.playChunk();
     }
     if(Start) AliveBird.Gravity();
 
@@ -214,6 +260,10 @@ void GameLoop::Event()
             if(ground[i].getDest().x < -GROUND_WIDTH)
                 ground[i].SetGround(ground[(i+7)%8].getDest().x + GROUND_WIDTH - 50);
     }
+
+
+
+
 
 
     if(ColUp[CurCol].getDest().x <= 60)
@@ -229,29 +279,48 @@ void GameLoop::Event()
         SaveBestScore();
     }
 
+    if(CurScore>=20)
+    {
+        for(int i=0; i<8; i++)
+        {
+            int t = ColUp[i].getDest().y;
+            if(t == 0)
+                ColMoveup = true;
+            else if(t == -199)
+                ColMoveup = false;
 
+            if(ColMoveup)
+            {
+                ColUp[i].MoveUp();
+                ColDown[i].MoveUp();
+            }
+            else
+            {
+                ColUp[i].MoveDown();
+                ColDown[i].MoveDown();
+            }
+        }
+    }
 
     if(Start)
     {
         for(int i=0; i<8; i++)
         {
-            ColUp[i].MoveUp();
-            ColDown[i].MoveDown();
+            ColUp[i].ColMove();
+            ColDown[i].ColMove();
             if(ColUp[i].getDest().x < -COL_WIDTH)
             {
-                YCol = rand() % 150;
+                YCol = rand() % 200;
                 ColUp[i].SetPos(ColUp[(i+7)%8].getDest().x + 170, -YCol);
                 ColDown[i].SetPos(ColDown[(i+7)%8].getDest().x + 170, -YCol + COL_HEIGHT + 100);
             }
 
 
-
             if(AliveBird.GetCollision(ColUp[i].getDest(), COL_WIDTH, COL_HEIGHT) || AliveBird.GetCollision(ColDown[i].getDest(), COL_WIDTH, COL_HEIGHT) || AliveBird.GetCollision(ground[i].getDest(), GROUND_WIDTH, GROUND_HEIGHT))
             {
                 AliveBird.Die();
-                if(SoundOn)getHit.playChunk();
+                if(SoundOn && !Die)getHit.playChunk();
                 themeSong.pauseMusic();
-                SoundOn = false;
                 Die = true;
                 for(int j=0; j<8; j++)
                 {
@@ -264,15 +333,61 @@ void GameLoop::Event()
         }
     }
 
+
+    if((PauseButton.HandleEvent(&event1) || event1.key.keysym.sym  == SDLK_m) && !Pause && !Die)
+    {
+        Pause = true;
+        themeSong.pauseMusic();
+        for(int i=0; i<8; i++)
+        {
+            ground[i].Stop();
+            ColUp[i].Stop();
+            ColDown[i].Stop();
+        }
+        AliveBird.Stop();
+    }
+    else if((PauseButton.HandleEvent(&event1) || OkButton.HandleEvent(&event1) || event1.key.keysym.sym  == SDLK_m) && Pause)
+    {
+        Pause = false;
+        themeSong.resumeMusic();
+        for(int i=0; i<8; i++)
+        {
+            ground[i].Continue();
+            ColUp[i].Continue();
+            ColDown[i].Continue();
+        }
+        AliveBird.Continue();
+    }
+
+    if(Pause)
+    {
+        if(SoundIconOn.HandleEvent(&event1))
+        {
+            click.playChunk();
+            if(SoundOn)
+                SoundOn = false;
+            else
+                SoundOn = true;
+        }
+
+        if(BgTheme.HandleEvent(&event1))
+        {
+            click.playChunk();
+            if(CurBack==4) CurBack = 0;
+            else CurBack++;
+        }
+    }
+
+
+
     if(Die)
     {
         Start = false;
+        AliveBird.Die();
         if(OkButton.HandleEvent(&event1) || event1.key.keysym.sym  == SDLK_RETURN)
         {
             PlayAgain();
             Die = false;
-            SoundOn = true;
-//            themeSong.resumeMusic();
             AliveBird.Revive();
             CurScore = 0;
             CurCol = 0;
@@ -288,37 +403,98 @@ void GameLoop::Event()
 }
 
 
-void GameLoop::Render()
+
+void GameLoop::RenderBestCurNum()
 {
 
+    //show Curscore in board
+    if(CurScore<10)
+    {
+        int c = CurScore;
+        numberCur[c].setDest(415, 270, 20, 30);
+        numberCur[c].Render(renderer);
+    }
+    else
+    {
+        int tem = CurScore;
+        vector<int> digits;
+        while(tem>0)
+        {
+            digits.push_back(tem%10);
+            tem/=10;
+        }
+        int n = digits.size();
+        for(int i=0; i<n; i++)
+        {
+            int d = digits[i];
+            numberCur[d].setDest(415 - 20*i, 270, 20, 30);
+            numberCur[d].Render(renderer);
+        }
+    }
+
+
+    //show BestScore in board
+    if(CheckNew)
+        New.Render(renderer);
+    if(BestScore<10)
+    {
+        int b = BestScore;
+        numberBest[b].setDest(415, 330, 20, 30);
+        numberBest[b].Render(renderer);
+    }
+    else
+    {
+        int tem = BestScore;
+        vector<int> digits;
+        while(tem>0)
+        {
+            digits.push_back(tem%10);
+            tem/=10;
+        }
+        int n = digits.size();
+        for(int i=0; i<n; i++)
+        {
+            numberBest[digits[i]].setDest(415 - 20*i, 330, 20, 30);
+            numberBest[digits[i]].Render(renderer);
+        }
+    }
+}
+
+
+
+void GameLoop::RenderAll()
+{
 
 	SDL_RenderClear(renderer);
-	Back.NormalRender(renderer);
+	Back[CurBack].Render(renderer);
 
-    if(!Start)
+    if(!Start && !Pause)
         if(!Die)
-            guide.AdvanceRender(renderer, guide.getSrc(), guide.getDest());
+            guide.Render(renderer);
 
-    if(!Die)
-        AliveBird.AliveRender(renderer, AliveBird.getSrc(), AliveBird.getDest());
+    if(!Die && !Pause)
+        AliveBird.AliveRender(renderer);
 
     for(int i=0; i<8; i++)
     {
-        ColUp[i].CollumnRender(renderer, ColUp[i].getSrc(), ColUp[i].getDest());
-        ColDown[i].CollumnRender(renderer, ColDown[i].getSrc(), ColDown[i].getDest());
+        ColUp[i].CollumnRender(renderer);
+        ColDown[i].CollumnRender(renderer);
     }
     for(int i=0; i<8; i++)
     {
-        ground[i].AdvanceRender(renderer, ground[i].getSrc(), ground[i].getDest());
+        ground[i].Render(renderer);
     }
+
+    PauseButton.Render(renderer);
 
     if(Start)
     {
+
         if(CurScore<10)
         {
             int c = CurScore;
             numberCount[c].setDest(20, 20, 24, 36);
-            numberCount[c].AdvanceRender(renderer, numberCount[c].getSrc(), numberCount[c].getDest());
+            numberCount[c].Render(renderer);
         }
 
         else
@@ -335,79 +511,40 @@ void GameLoop::Render()
             {
                 int d = digits[i];
                 numberCount[d].setDest(20 + 24*(n-i-1), 20, 24, 36);
-                numberCount[d].AdvanceRender(renderer, numberCount[d].getSrc(), numberCount[d].getDest());
+                numberCount[d].Render(renderer);
             }
         }
 
     }
 
+    if(Pause)
+    {
+        PauseBoard.Render(renderer);
+        PauseButton.Render(renderer);
+        OkButton.Render(renderer);
+        BgTheme.Render(renderer);
+        AliveBird.DieRender(renderer);
+        RenderBestCurNum();
+        if(SoundOn)
+            SoundIconOn.Render(renderer);
+        if(!SoundOn)
+            SoundIconOff.Render(renderer);
+    }
 
 	if(Die)
     {
-        GameOver.AdvanceRender(renderer, GameOver.getSrc(), GameOver.getDest());
-        DieBird.DieRender(renderer, AliveBird.getSrc(), AliveBird.getDest());
-        ScoreBoard.AdvanceRender(renderer, ScoreBoard.getSrc(), ScoreBoard.getDest());
-        OkButton.Render(renderer, OkButton.getSrc(), OkButton.getDest());
+        GameOver.Render(renderer);
+        AliveBird.DieRender(renderer);
+        ScoreBoard.Render(renderer);
+        OkButton.Render(renderer);
         if(CurScore >= 1 && CurScore < 10)
-            CopperIcon.AdvanceRender(renderer, CopperIcon.getSrc(), CopperIcon.getDest());
+            CopperIcon.Render(renderer);
         else if(CurScore >= 10 && CurScore < 50)
-            SilverIcon.AdvanceRender(renderer, SilverIcon.getSrc(), SilverIcon.getDest());
+            SilverIcon.Render(renderer);
         else if(CurScore >= 50)
-            GoldIcon.AdvanceRender(renderer, GoldIcon.getSrc(), GoldIcon.getDest());
+            GoldIcon.Render(renderer);
 
-
-        //show Curscore in board
-        if(CurScore<10)
-        {
-            int c = CurScore;
-            numberCur[c].setDest(415, 270, 20, 30);
-            numberCur[c].AdvanceRender(renderer, numberCur[c].getSrc(), numberCur[c].getDest());
-        }
-        else
-        {
-            int tem = CurScore;
-            vector<int> digits;
-            while(tem>0)
-            {
-                digits.push_back(tem%10);
-                tem/=10;
-            }
-            int n = digits.size();
-            for(int i=0; i<n; i++)
-            {
-                int d = digits[i];
-                numberCur[d].setDest(415 - 20*i, 270, 20, 30);
-                numberCur[d].AdvanceRender(renderer, numberCur[d].getSrc(), numberCur[d].getDest());
-            }
-        }
-
-
-        //show BestScore in board
-        if(CheckNew)
-            New.AdvanceRender(renderer, New.getSrc(), New.getDest());
-
-        if(BestScore<10)
-        {
-            int b = BestScore;
-            numberBest[b].setDest(415, 330, 20, 30);
-            numberBest[b].AdvanceRender(renderer, numberBest[b].getSrc(), numberBest[b].getDest());
-        }
-        else
-        {
-            int tem = BestScore;
-            vector<int> digits;
-            while(tem>0)
-            {
-                digits.push_back(tem%10);
-                tem/=10;
-            }
-            int n = digits.size();
-            for(int i=0; i<n; i++)
-            {
-                numberBest[digits[i]].setDest(415 - 20*i, 330, 20, 30);
-                numberBest[digits[i]].AdvanceRender(renderer, numberBest[digits[i]].getSrc(), numberBest[digits[i]].getDest());
-            }
-        }
+        RenderBestCurNum();
     }
 
 	SDL_RenderPresent(renderer);

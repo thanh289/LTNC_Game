@@ -2,9 +2,9 @@
 #include "Button.h"
 #include "SDL.h"
 
-void Button::Render(SDL_Renderer* ren, SDL_Rect src, SDL_Rect dest)
+void Button::Render(SDL_Renderer* ren)
 {
-    SDL_RenderCopy(ren, getTexture(), &src, &dest);
+    SDL_RenderCopy(ren, getTexture(), &getSrc(), &getDest());
 }
 
 

@@ -9,7 +9,7 @@ private:
     const int BUTTON_HEIGHT = 24;
 
 public:
-    void Render(SDL_Renderer* ren, SDL_Rect src, SDL_Rect dest);
+    void Render(SDL_Renderer* ren);
 
     bool HandleEvent(SDL_Event *e);
 };

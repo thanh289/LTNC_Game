@@ -1,16 +1,9 @@
 #include "Background.h"
 
 
-void Background::NormalRender(SDL_Renderer* ren)
+void Background::Render(SDL_Renderer* ren)
 {
-    SDL_RenderCopy(ren, getTexture(), NULL, NULL);
-
-}
-
-void Background::AdvanceRender(SDL_Renderer* ren, SDL_Rect src, SDL_Rect dest)
-{
-
-    SDL_RenderCopy(ren, getTexture(), &src, &dest);
+    SDL_RenderCopy(ren, getTexture(), &getSrc(), &getDest());
 }
 
 

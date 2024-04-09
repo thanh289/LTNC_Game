@@ -56,8 +56,6 @@
 		<Unit filename="Object.h" />
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.h" />
-		<Unit filename="TextureManager.cpp" />
-		<Unit filename="TextureManager.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="score.txt" />
 		<Extensions />

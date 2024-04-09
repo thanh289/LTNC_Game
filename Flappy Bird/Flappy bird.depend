@@ -861,37 +861,37 @@
 	"begin_code.h"
 	"close_code.h"
 
-1708783731 source:c:\github\ltnc_game\flappy bird\background.cpp
+1712153082 source:c:\github\ltnc_game\flappy bird\background.cpp
 	"Background.h"
 
-1709307148 c:\github\ltnc_game\flappy bird\background.h
+1712153062 c:\github\ltnc_game\flappy bird\background.h
 	<iostream>
 	"Object.h"
 
-1709621596 c:\github\ltnc_game\flappy bird\object.h
+1712152796 c:\github\ltnc_game\flappy bird\object.h
 	<SDL.h>
-	"TextureManager.h"
+	<SDL_image.h>
 
 1708247089 c:\github\ltnc_game\flappy bird\texturemanager.h
 	<SDL.h>
 	<SDL_image.h>
 
-1708783770 source:c:\github\ltnc_game\flappy bird\col.cpp
+1712159238 source:c:\github\ltnc_game\flappy bird\col.cpp
 	"Col.h"
 
-1708783754 c:\github\ltnc_game\flappy bird\col.h
+1712158941 c:\github\ltnc_game\flappy bird\col.h
 	"Object.h"
 	"Player.h"
 
-1709907914 c:\github\ltnc_game\flappy bird\player.h
+1712153537 c:\github\ltnc_game\flappy bird\player.h
 	"Object.h"
 	"Col.h"
 
-1711610252 source:c:\github\ltnc_game\flappy bird\gameloop.cpp
+1712199826 source:c:\github\ltnc_game\flappy bird\gameloop.cpp
 	<bits/stdc++.h>
 	"GameLoop.h"
 
-1711603774 c:\github\ltnc_game\flappy bird\gameloop.h
+1712158278 c:\github\ltnc_game\flappy bird\gameloop.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
@@ -905,16 +905,16 @@
 	"Button.h"
 	"Music.h"
 
-1711609298 source:c:\github\ltnc_game\flappy bird\main.cpp
+1711729627 source:c:\github\ltnc_game\flappy bird\main.cpp
 	<iostream>
 	"GameLoop.h"
 	"Music.h"
 
-1708502899 source:c:\github\ltnc_game\flappy bird\object.cpp
+1712152804 source:c:\github\ltnc_game\flappy bird\object.cpp
 	"Object.h"
-	"TextureManager.h"
+	<SDL_image.h>
 
-1709907925 source:c:\github\ltnc_game\flappy bird\player.cpp
+1712154579 source:c:\github\ltnc_game\flappy bird\player.cpp
 	"Player.h"
 
 1708247098 source:c:\github\ltnc_game\flappy bird\texturemanager.cpp
@@ -1324,11 +1324,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1711179740 c:\github\ltnc_game\flappy bird\button.h
+1712153057 c:\github\ltnc_game\flappy bird\button.h
 	"Object.h"
 	<SDL.h>
 
-1709389971 source:c:\github\ltnc_game\flappy bird\button.cpp
+1712153067 source:c:\github\ltnc_game\flappy bird\button.cpp
 	"Button.h"
 	"SDL.h"
 

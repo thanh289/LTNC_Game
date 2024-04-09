@@ -1,27 +1,29 @@
 #include "Player.h"
 
 
-void Player::DieRender(SDL_Renderer* ren, SDL_Rect src, SDL_Rect dest)
+void Player::DieRender(SDL_Renderer* ren)
 {
-    SDL_RenderCopy(ren, getTexture(), &src, &dest);
+    SDL_RenderCopyEx(ren, getTexture(), &getSrc(), &getDest(), angle, NULL, SDL_FLIP_NONE);
 }
 
-void Player::AliveRender(SDL_Renderer* ren, SDL_Rect src, SDL_Rect dest)
+void Player::AliveRender(SDL_Renderer* ren)
 {
     animationTimer++;
-	if (animationTimer < 16)
+	if (animationTimer < 20)
 	{
-		SDL_RenderCopy(ren, getTexture(), &src, &dest);
+		    SDL_RenderCopyEx(ren, getTexture(), &getSrc(), &getDest(), angle, NULL, SDL_FLIP_NONE);
 	}
-	else if (animationTimer >= 16 && animationTimer <= 32)
+	else if (animationTimer >= 20 && animationTimer <= 40)
 	{
-		SDL_RenderCopy(ren, Tex1, &src, &dest);
+		    SDL_RenderCopyEx(ren, Tex1, &getSrc(), &getDest(), angle, NULL, SDL_FLIP_NONE);
+
 	}
-	else if (animationTimer > 32)
+	else if (animationTimer > 40)
 	{
-		SDL_RenderCopy(ren, Tex2, &src, &dest);
+		    SDL_RenderCopyEx(ren, Tex2, &getSrc(), &getDest(), angle, NULL, SDL_FLIP_NONE);
+
 	}
-	if (animationTimer > 48)
+	if (animationTimer > 60)
 	{
 		animationTimer = 0;
 	}
@@ -30,40 +32,63 @@ void Player::AliveRender(SDL_Renderer* ren, SDL_Rect src, SDL_Rect dest)
 
 void Player::Gravity()
 {
-	if (JumpState())
+	if (inJump && !Pause)
 	{
-		accelerator += 0.2;
-		Ypos += gravity + accelerator + jumpHeight;
+		accelerator1 += 0.2;
+		Ypos += accelerator1 + jumpHeight;
 		setDest(50, Ypos, 34, 24);
-
+        angle += 2;
 		if(Ypos<0){
             Ypos = 0;
             Ypos += 2;
 		}
 	}
 
+	if (angle >= 45)
+		angle = 45;
+
 }
 
 void Player::Jump()
 {
-        accelerator = 0;
+        accelerator1 = 0;
+        angle = -45;
         inJump = true;
-
 }
 
 
 void Player::Die()
 {
     inJump = false;
-    gravity = 0;
-    jumpHeight = 0;
+    Pause = true;
+    if(Ypos < 500)
+    {
+        accelerator2 += 0.2;
+        Ypos += accelerator2;
+        setDest(50, Ypos, 34, 24);
+    }
+    if(angle < 90)
+        angle += 3;
+
+}
+
+void Player::Stop()
+{
+	Pause = true;
+}
+
+void Player::Continue()
+{
+	Pause = false;
 }
 
 void Player::Revive()
 {
-    gravity = 0.1;
+    Pause = false;
     jumpHeight = -4;
     Ypos = 320;
+    accelerator2 = 0;
+    angle = 0;
 }
 
 
@@ -105,18 +130,16 @@ bool Player::GetCollision(SDL_Rect Col, int ob_W, int ob_H)
 
 
 
-
-bool Player::JumpState()
-{
-	return inJump;
-}
-
 void Player::CreateTexture1(const char* address, SDL_Renderer* ren)
 {
-	Tex1 = TextureManager::Texture(address, ren);
+    SDL_Surface* surface;
+	surface = IMG_Load(address);
+	Tex1 = SDL_CreateTextureFromSurface(ren, surface);
 }
 
 void Player::CreateTexture2(const char* address, SDL_Renderer* ren)
 {
-	Tex2 = TextureManager::Texture(address, ren);
+	SDL_Surface* surface;
+	surface = IMG_Load(address);
+	Tex2 = SDL_CreateTextureFromSurface(ren, surface);
 }
