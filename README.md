@@ -15,5 +15,5 @@
     - Khi người chơi đạt đến 20 điểm, cột di chuyển gây thêm phần khó khăn cho người chơi.
     - Vẽ chim ở các trạng thái khác nhau (bay, rơi, ...).
     - Xử lí va chạm.
-    - Nhạc phát ra dựa vào hoạt động của người chơi và trạng thái game.
+    - Âm thanh phát ra dựa vào hoạt động của người chơi và trạng thái game.
     - Giới hạn FPS để tránh tình trạng game chạy quá nhanh cho một số máy có cấu hình cao.
