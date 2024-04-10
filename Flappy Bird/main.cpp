@@ -7,17 +7,25 @@ GameLoop* g1 = new GameLoop();
 Music themeSong;
 int main(int argc, char** argv)
 {
+    const int fps = 60;
+    const int delay_time = 1000/fps;
 
-    cout<<"Flappy Bird"<<endl;
+    Uint64 Start;
+    Uint64 frameTime;
+
 	g1->Initialize();
 	g1->PlayThemeSong();
 	while (g1->getGameState())
 	{
-//	    int x, y;
-//      SDL_GetMouseState( &x, &y );
-//      cout<<x<<" "<<y<<endl;
+
 		g1->Event();
 		g1->RenderAll();
+
+		frameTime = SDL_GetTicks() - Start;
+		if(frameTime <  delay_time)
+        {
+            SDL_Delay(delay_time - frameTime);
+        }
 
 	}
 	g1->Clear();
