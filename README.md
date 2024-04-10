@@ -1,7 +1,7 @@
 1. Thông tin sinh viên:
   - Họ và tên: Trần Duy Thành
   - MSSV: 23021720
-  - 
+    
 2. Chủ đề game: Làm lại game Flappy Bird
 
 3. Ngưỡng điểm mong muốn: 8,5 +
