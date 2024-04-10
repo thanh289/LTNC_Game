@@ -47,7 +47,8 @@ private:
     Music getHit;
     Music getPoint;
     Music click;
-    Music themeSong;
+    Music StartSong;
+    Music PlaySong;
 	int XGround = 0;
 	int YCol;
 	int CurScore = 0;
@@ -55,6 +56,7 @@ private:
 	int CheckNew = 0;
 	int CurCol = 0;
 	int CurBack = 0;
+	int SongState = 0;
 	bool GameState;
 	bool Start = false;
 	bool Pause = false;
@@ -67,7 +69,6 @@ private:
 public:
 	GameLoop();
 	bool getGameState();
-	void PlayThemeSong();
 	void SaveBestScore();
 	void TakeBestScore();
 	void RenderBestCurNum();

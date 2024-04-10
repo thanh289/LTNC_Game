@@ -98,7 +98,7 @@ void GameLoop::PlayAgain()
         numberCount[i].setDest(20, 20, 24, 36);
     }
 
-    themeSong.playMusic();
+    SongState = 0;
     CheckNew = 0;
 }
 
@@ -201,17 +201,13 @@ void GameLoop::Initialize()
                 getHit.loadChunk("sound/sfx_hit.wav");
                 getPoint.loadChunk("sound/sfx_point.wav");
                 click.loadChunk("sound/sfx_click.wav");
-                themeSong.loadMusic("sound/Colorful-Flowers(chosic.com).mp3");
+                StartSong.loadMusic("sound/Bit_Adventure.mp3");
+                PlaySong.loadMusic("sound/8_Bit_Surf.mp3");
             }
         }
     }
 }
 
-void GameLoop::PlayThemeSong()
-{
-
-    themeSong.playMusic();
-}
 
 void GameLoop::SaveBestScore()
 {
@@ -233,10 +229,19 @@ void GameLoop::Event()
 {
 
     TakeBestScore();
+    if(SongState == 0)
+    {
+        SongState++;
+        StartSong.playMusic();
+    }
+    if(SongState == 2)
+    {
+        PlaySong.playMusic();
+    }
 
     if(!SoundOn || Pause || Die)
-        themeSong.pauseMusic();
-    else themeSong.resumeMusic();
+        PlaySong.pauseMusic();
+    else PlaySong.resumeMusic();
 
 
     SDL_PollEvent(&event1);
@@ -247,7 +252,12 @@ void GameLoop::Event()
 
     if((event1.type == SDL_MOUSEBUTTONDOWN || event1.key.keysym.sym == SDLK_SPACE) && !PauseButton.HandleEvent(&event1) && !Die)
     {
-            if(!Pause) Start =true;
+
+            if(!Pause)
+            {
+                Start =true;
+                SongState++;
+            }
             if(Start) AliveBird.Jump();
             if(SoundOn && !Pause && !Die) flyMu.playChunk();
     }
@@ -279,25 +289,32 @@ void GameLoop::Event()
         SaveBestScore();
     }
 
-    if(CurScore>=20)
+    if(CurScore>=10)
     {
         for(int i=0; i<8; i++)
         {
             int t = ColUp[i].getDest().y;
             if(t == 0)
                 ColMoveup = true;
-            else if(t == -199)
+            else if(t == -149)
                 ColMoveup = false;
 
             if(ColMoveup)
             {
-                ColUp[i].MoveUp();
-                ColDown[i].MoveUp();
+//                if(i%2)
+                {
+                    ColUp[i].MoveUp();
+                    ColDown[i].MoveUp();
+                }
+
             }
             else
             {
-                ColUp[i].MoveDown();
-                ColDown[i].MoveDown();
+                if(i%2)
+                {
+                    ColUp[i].MoveDown();
+                    ColDown[i].MoveDown();
+                }
             }
         }
     }
@@ -310,7 +327,7 @@ void GameLoop::Event()
             ColDown[i].ColMove();
             if(ColUp[i].getDest().x < -COL_WIDTH)
             {
-                YCol = rand() % 200;
+                YCol = rand() % 150;
                 ColUp[i].SetPos(ColUp[(i+7)%8].getDest().x + 170, -YCol);
                 ColDown[i].SetPos(ColDown[(i+7)%8].getDest().x + 170, -YCol + COL_HEIGHT + 100);
             }
@@ -320,7 +337,7 @@ void GameLoop::Event()
             {
                 AliveBird.Die();
                 if(SoundOn && !Die)getHit.playChunk();
-                themeSong.pauseMusic();
+                PlaySong.pauseMusic();
                 Die = true;
                 for(int j=0; j<8; j++)
                 {
@@ -337,7 +354,7 @@ void GameLoop::Event()
     if((PauseButton.HandleEvent(&event1) || event1.key.keysym.sym  == SDLK_m) && !Pause && !Die)
     {
         Pause = true;
-        themeSong.pauseMusic();
+        PlaySong.pauseMusic();
         for(int i=0; i<8; i++)
         {
             ground[i].Stop();
@@ -349,7 +366,7 @@ void GameLoop::Event()
     else if((PauseButton.HandleEvent(&event1) || OkButton.HandleEvent(&event1) || event1.key.keysym.sym  == SDLK_m) && Pause)
     {
         Pause = false;
-        themeSong.resumeMusic();
+        PlaySong.resumeMusic();
         for(int i=0; i<8; i++)
         {
             ground[i].Continue();

@@ -10,11 +10,10 @@ int main(int argc, char** argv)
     const int fps = 60;
     const int delay_time = 1000/fps;
 
-    Uint64 Start;
+    Uint64 Start = 0;
     Uint64 frameTime;
 
 	g1->Initialize();
-	g1->PlayThemeSong();
 	while (g1->getGameState())
 	{
 
