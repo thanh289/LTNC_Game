@@ -12,7 +12,7 @@
     - Bảng game sau khi thua hiện điểm đạt được, huy chương đạt được ứng với số điểm đó và điểm cao nhất.
      (Nhỏ hơn 10: HCĐ; Từ 10 đến 50: HCB; Lớn hơn 50: HCV)
     - Chiều cao cột được sinh ngẫu nhiên để game không quá dễ.
-    - Khi người chơi đạt đến 20 điểm, cột di chuyển gây thêm phần khó khăn cho người chơi.
+    - Khi người chơi đạt đến 10 điểm, cột di chuyển gây thêm phần khó khăn cho người chơi.
     - Vẽ chim ở các trạng thái khác nhau (bay, rơi, ...).
     - Xử lí va chạm.
     - Âm thanh phát ra dựa vào hoạt động của người chơi và trạng thái game.
