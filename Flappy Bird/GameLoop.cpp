@@ -289,7 +289,7 @@ void GameLoop::Event()
         SaveBestScore();
     }
 
-    if(CurScore>=10)
+    if(CurScore>=1)
     {
         for(int i=0; i<8; i++)
         {
@@ -301,7 +301,7 @@ void GameLoop::Event()
 
             if(ColMoveup)
             {
-//                if(i%2)
+                if(i%2)
                 {
                     ColUp[i].MoveUp();
                     ColDown[i].MoveUp();
